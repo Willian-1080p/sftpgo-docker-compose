@@ -1,0 +1,23 @@
+services:
+  sftpgo:
+    image: drakkan/sftpgo:latest
+    container_name: sftpgo
+    restart: unless-stopped
+
+    ports:
+      - "8080:8080"  # Painel Web
+      - "2022:2022"  # SFTP
+
+    volumes:
+      - sftpgo_data:/srv/sftpgo
+      - sftpgo_config:/var/lib/sftpgo
+
+    environment:
+      SFTPGO_LOG_LEVEL: "info"
+
+volumes:
+  sftpgo_data:
+    name: sftpgo_data
+
+  sftpgo_config:
+    name: sftpgo_config
